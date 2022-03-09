@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Container,
   Box,
@@ -14,7 +14,7 @@ const UserProfile = () => {
   const profile = location.state;
 
   return (
-    <>
+    <Fragment>
       <MainComponent />
       <Box p={2}>
         <Typography variant="h4" component="h2">
@@ -83,7 +83,7 @@ const UserProfile = () => {
           </Grid>
         </Grid>
       </Container>
-    </>
+    </Fragment>
   );
 };
 

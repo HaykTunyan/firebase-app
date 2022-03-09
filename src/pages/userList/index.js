@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   Container,
   Table,
@@ -101,10 +101,6 @@ const UserList = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const { users } = useSelector((state) => state.users.allUsers);
 
-  useEffect(() => {
-    userService.getAllusers();
-  }, []);
-
   const openProfile = (id, name, email, age, position) => {
     navigate("/user-profile", { state: { id, name, email, age, position } });
   };
@@ -118,8 +114,12 @@ const UserList = () => {
     setPage(0);
   };
 
+  useEffect(() => {
+    userService.getAllusers();
+  }, []);
+
   return (
-    <>
+    <Fragment>
       <Box p={2}>
         <MainComponent />
       </Box>
@@ -185,7 +185,7 @@ const UserList = () => {
           />
         </TableContainer>
       </Container>
-    </>
+    </Fragment>
   );
 };
 

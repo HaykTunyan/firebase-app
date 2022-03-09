@@ -1,19 +1,16 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Toolbar,
   AppBar,
   Box,
   Typography,
-  Button,
   IconButton,
-  Breadcrumbs,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 
 const HeaderComponent = () => {
   return (
-    <>
+    <Fragment>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -32,7 +29,7 @@ const HeaderComponent = () => {
           </Toolbar>
         </AppBar>
       </Box>
-    </>
+    </Fragment>
   );
 };
 

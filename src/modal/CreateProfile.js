@@ -67,7 +67,7 @@ const CreateProfile = () => {
 
   return (
     <Fragment>
-      <IconButton aria-label="settings" size="large" onClick={handleClickOpen}>
+      <IconButton aria-label="settings" size="medium" onClick={handleClickOpen}>
         <AddCircleIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose}>

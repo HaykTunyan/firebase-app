@@ -1,13 +1,13 @@
-import HeaderComponent from '../components/header';
-import { Router } from '../router';
-import './App.css';
+import { Fragment } from "react";
+import HeaderComponent from "../components/header";
+import { Router } from "../router";
 
 function App() {
   return (
-    <>
-    <HeaderComponent />
-    <Router />
-    </>
+    <Fragment>
+      <HeaderComponent />
+      <Router />
+    </Fragment>
   );
 }
 

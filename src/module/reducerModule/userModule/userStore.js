@@ -1,10 +1,10 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
   name: "users",
   initialState: {
     allUsers: {
-      allUsers: 0,
+      allUsers: 100,
       limit: 10,
       page: 1,
       success: false,

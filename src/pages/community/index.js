@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Container,
   Table,
@@ -11,7 +11,6 @@ import {
   TablePagination,
   Typography,
   Box,
-  Button,
   IconButton,
 } from "@material-ui/core";
 import MainComponent from "../../components/main";
@@ -20,28 +19,12 @@ import CreateProfile from "../../modal/CreateProfile";
 import DeleteModal from "../../modal/DeleteModal";
 import { Refresh as RefreshIcon } from "@material-ui/icons";
 import fb from "../../firebase";
-import { async } from "@firebase/util";
 
 const Community = () => {
   // Hooks.
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const usersData = await fb.getCollection({ collectionName: "users" });
-      const users = usersData.docs.map((user) => user.data());
-      setUsers(users);
-    };
-    getUsers();
-  }, []);
-
-  const updateList = async () => {
-    const usersData = await fb.getCollection({ collectionName: "users" });
-    const users = usersData.docs.map((user) => user.data());
-    setUsers(users);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -52,8 +35,23 @@ const Community = () => {
     setPage(0);
   };
 
+  const updateList = async () => {
+    const usersData = await fb.getCollection({ collectionName: "users" });
+    const users = usersData.docs.map((user) => user.data());
+    setUsers(users);
+  };
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const usersData = await fb.getCollection({ collectionName: "users" });
+      const users = usersData.docs.map((user) => user.data());
+      setUsers(users);
+    };
+    getUsers();
+  }, []);
+
   return (
-    <>
+    <Fragment>
       <Box p={2}>
         <MainComponent />
       </Box>
@@ -131,7 +129,7 @@ const Community = () => {
           />
         </TableContainer>
       </Container>
-    </>
+    </Fragment>
   );
 };
 

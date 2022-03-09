@@ -1,4 +1,3 @@
-import axios from "axios";
 import { httpClient } from "../../../core/httpClient";
 import { store } from "../../store";
 import { userSlice } from "./userStore";

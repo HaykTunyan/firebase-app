@@ -14,6 +14,7 @@ import { DeleteForever as DeleteForeverIcon } from "@material-ui/icons";
 import fb from "../firebase";
 
 const DeleteModal = ({ id, name }) => {
+  // Hooks.
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -28,7 +29,6 @@ const DeleteModal = ({ id, name }) => {
     const removeUser = async () => {
       await fb.removeDocument({ collectionName: "users", documentId: id });
     };
-
     removeUser();
     setTimeout(() => {
       handleClose();
