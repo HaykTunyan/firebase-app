@@ -50,7 +50,6 @@ const CreateProfile = () => {
   };
 
   const handleSubmit = (data) => {
-    console.log(" date ", date);
     const addUser = async () => {
       const documentId = uuidv4();
       await fb.setDocument({
@@ -61,7 +60,9 @@ const CreateProfile = () => {
     };
 
     addUser();
-    handleClose();
+    setTimeout(() => {
+      handleClose();
+    }, 1000);
   };
 
   return (
@@ -77,6 +78,7 @@ const CreateProfile = () => {
               ...profile,
             }}
             initialForms={profile}
+            validationSchema={ProfileValidation}
             onSubmit={handleSubmit}
           >
             {({ errors, touched, handleChange, handleBlur }) => (
@@ -85,6 +87,9 @@ const CreateProfile = () => {
                   margin="dense"
                   id="name"
                   defaultValue={profile.name}
+                  error={Boolean(touched.name && errors.name)}
+                  helperText={touched.name && errors.name}
+                  onBlur={handleBlur}
                   onChange={handleChange}
                   label="Name"
                   type="text"
@@ -96,6 +101,9 @@ const CreateProfile = () => {
                   margin="dense"
                   id="email"
                   defaultValue={profile.email}
+                  error={Boolean(touched.email && errors.email)}
+                  helperText={touched.email && errors.email}
+                  onBlur={handleBlur}
                   onChange={handleChange}
                   label="Admin Email"
                   type="email"
@@ -107,6 +115,9 @@ const CreateProfile = () => {
                   margin="dense"
                   id="age"
                   defaultValue={profile.age}
+                  error={Boolean(touched.age && errors.age)}
+                  helperText={touched.age && errors.age}
+                  onBlur={handleBlur}
                   onChange={handleChange}
                   label="Age"
                   type="number"
@@ -118,6 +129,9 @@ const CreateProfile = () => {
                   margin="dense"
                   id="position"
                   defaultValue={profile.position}
+                  error={Boolean(touched.position && errors.position)}
+                  helperText={touched.position && errors.position}
+                  onBlur={handleBlur}
                   onChange={handleChange}
                   label="Position"
                   type="text"

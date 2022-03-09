@@ -11,12 +11,16 @@ import {
   TablePagination,
   Typography,
   Box,
+  Button,
+  IconButton,
 } from "@material-ui/core";
 import MainComponent from "../../components/main";
 import EditProfile from "../../modal/EditProfile";
 import CreateProfile from "../../modal/CreateProfile";
 import DeleteModal from "../../modal/DeleteModal";
+import { Refresh as RefreshIcon } from "@material-ui/icons";
 import fb from "../../firebase";
+import { async } from "@firebase/util";
 
 const Community = () => {
   // Hooks.
@@ -33,6 +37,12 @@ const Community = () => {
     getUsers();
   }, []);
 
+  const updateList = async () => {
+    const usersData = await fb.getCollection({ collectionName: "users" });
+    const users = usersData.docs.map((user) => user.data());
+    setUsers(users);
+  };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -41,6 +51,7 @@ const Community = () => {
     setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
+
   return (
     <>
       <Box p={2}>
@@ -52,6 +63,15 @@ const Community = () => {
             Community
           </Typography>
           <Box>
+            <IconButton
+              aria-label="settings"
+              size="medium"
+              color="primary"
+              mx={2}
+              onClick={updateList}
+            >
+              <RefreshIcon />
+            </IconButton>
             <CreateProfile />
           </Box>
         </Box>
@@ -93,7 +113,7 @@ const Community = () => {
                           age={row.age}
                           position={row.position}
                         />
-                        <DeleteModal id={row.id} />
+                        <DeleteModal id={row.id} name={row.name} />
                       </Box>
                     </TableCell>
                   </TableRow>

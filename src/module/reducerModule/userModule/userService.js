@@ -16,13 +16,46 @@ class UserService {
       });
   }
 
-  getUserById(id) {}
+  getUserById(id) {
+    httpClient
+      .get("/users", {
+        id,
+      })
+      .then(({ data }) => {
+        store.dispatch(setAllUsers(data));
+      });
+  }
 
-  creteUser(body) {}
+  creteUser(body) {
+    httpClient
+      .post("/users", {
+        body,
+      })
+      .then(({ data }) => {
+        store.dispatch(setAllUsers(data));
+      });
+  }
 
-  deleteUser(id) {}
+  deleteUser(id) {
+    httpClient
+      .delete("/users", {
+        id,
+      })
+      .then(({ data }) => {
+        store.dispatch(setAllUsers(data));
+      });
+  }
 
-  editUser(id, body) {}
+  editUser(id, body) {
+    httpClient
+      .post("/users", {
+        id,
+        body,
+      })
+      .then(({ data }) => {
+        store.dispatch(setAllUsers(data));
+      });
+  }
 }
 
 export const userService = new UserService();

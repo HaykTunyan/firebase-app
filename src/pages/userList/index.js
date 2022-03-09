@@ -105,10 +105,8 @@ const UserList = () => {
     userService.getAllusers();
   }, []);
 
-  console.log(" users ", users);
-
-  const openProfile = (id) => {
-    navigate("/user-profile", { state: { id } });
+  const openProfile = (id, name, email, age, position) => {
+    navigate("/user-profile", { state: { id, name, email, age, position } });
   };
 
   const handleChangePage = (event, newPage) => {
@@ -122,18 +120,15 @@ const UserList = () => {
 
   return (
     <>
-
-<Box p={2}>
+      <Box p={2}>
         <MainComponent />
       </Box>
-   
-      
       <Container>
-      <Box p={2}>
-        <Typography variant="h4" component="h2">
-          User List
-        </Typography>
-      </Box>
+        <Box p={2}>
+          <Typography variant="h4" component="h2">
+            User List
+          </Typography>
+        </Box>
         <TableContainer component={Paper}>
           <Table aria-label="caption table">
             <TableHead>
@@ -162,7 +157,15 @@ const UserList = () => {
                       <IconButton
                         size="medium"
                         aria-label="details"
-                        onClick={() => openProfile(rows.id)}
+                        onClick={() =>
+                          openProfile(
+                            row.id,
+                            row.name,
+                            row.email,
+                            row.age,
+                            row.position
+                          )
+                        }
                       >
                         <RemoveRedEyeIcon />
                       </IconButton>

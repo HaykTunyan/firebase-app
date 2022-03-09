@@ -8,11 +8,12 @@ import {
   Divider,
   IconButton,
   Box,
+  Typography,
 } from "@material-ui/core";
 import { DeleteForever as DeleteForeverIcon } from "@material-ui/icons";
 import fb from "../firebase";
 
-const DeleteModal = ({ id }) => {
+const DeleteModal = ({ id, name }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -29,7 +30,9 @@ const DeleteModal = ({ id }) => {
     };
 
     removeUser();
-    handleClose();
+    setTimeout(() => {
+      handleClose();
+    }, 1000);
   };
 
   return (
@@ -39,8 +42,14 @@ const DeleteModal = ({ id }) => {
       </IconButton>
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="xs">
         <DialogContent>
-          <DialogContentText pt={4} textAlign="center">
-            Delter Profile
+          <DialogContentText pt={4}>
+            <Box display="flex" justifyContent="center">
+              <Typography variant="h6">Delete</Typography>
+              <Box px={1} />
+              <Typography variant="h6" color="primary">
+                {name}
+              </Typography>
+            </Box>
           </DialogContentText>
         </DialogContent>
         <Divider my={6} />
@@ -57,7 +66,7 @@ const DeleteModal = ({ id }) => {
               Cancel
             </Button>
             <Button variant="contained" color="primary" onClick={handleDelete}>
-              Delete Item
+              Delete
             </Button>
           </Box>
         </DialogActions>

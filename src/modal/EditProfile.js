@@ -58,7 +58,9 @@ const EditProfile = ({ id, name, email, age, position }) => {
       });
     };
     editUser();
-    handleClose();
+    setTimeout(() => {
+      handleClose();
+    }, 1000);
   };
 
   return (
