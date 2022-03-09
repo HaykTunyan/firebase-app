@@ -1,5 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { spacing } from "@material-ui/system";
+import styled from "styled-components/macro";
+import fb from "../firebase";
+import { v4 as uuidv4 } from "uuid";
 import {
   Button,
   TextField as MuiTextField,
@@ -8,12 +13,23 @@ import {
   DialogTitle,
   Box,
   IconButton,
-  TextField,
-  Typography,
 } from "@material-ui/core";
 import { AddCircle as AddCircleIcon } from "@material-ui/icons";
-import fb from "../firebase";
-import { v4 as uuidv4 } from "uuid";
+
+// Spacing.
+const TextField = styled(MuiTextField)(spacing);
+
+// Validation Schema.
+const ProfileValidation = Yup.object().shape({
+  name: Yup.string().required("Name is requrired"),
+  email: Yup.string()
+    .email("Must be a valid email")
+    .min(8, "Must be at least 8 characters")
+    .max(255)
+    .required("Email is requried"),
+  age: Yup.string().required(" Passowrd is required "),
+  position: Yup.string().required(" Passowrd is required "),
+});
 
 const CreateProfile = () => {
   // Hooks.
@@ -34,6 +50,7 @@ const CreateProfile = () => {
   };
 
   const handleSubmit = (data) => {
+    console.log(" date ", date);
     const addUser = async () => {
       const documentId = uuidv4();
       await fb.setDocument({
@@ -73,7 +90,7 @@ const CreateProfile = () => {
                   type="text"
                   variant="outlined"
                   fullWidth
-                  my={8}
+                  my={2}
                 />
                 <TextField
                   margin="dense"
@@ -84,7 +101,7 @@ const CreateProfile = () => {
                   type="email"
                   variant="outlined"
                   fullWidth
-                  my={8}
+                  my={2}
                 />
                 <TextField
                   margin="dense"
@@ -95,7 +112,7 @@ const CreateProfile = () => {
                   type="number"
                   variant="outlined"
                   fullWidth
-                  my={8}
+                  my={2}
                 />
                 <TextField
                   margin="dense"
@@ -106,7 +123,7 @@ const CreateProfile = () => {
                   type="text"
                   variant="outlined"
                   fullWidth
-                  my={8}
+                  my={2}
                 />
                 <Box
                   sx={{
